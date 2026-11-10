@@ -96,6 +96,7 @@
     "tests.test_projects.ProjectTests.test_staged_unstaged_untracked_binary",
     "tests.test_publication.PublicationTests.test_build_allowlist_excludes_unreviewed_documents",
     "tests.test_publication.PublicationTests.test_detects_secret_without_echoing_value",
+    "tests.test_publication.PublicationTests.test_documentation_checks_picture_sources_and_anchors",
     "tests.test_publication.PublicationTests.test_forbidden_files",
     "tests.test_release_validation.ReleaseValidationTests.test_capture_detects_added_file",
     "tests.test_release_validation.ReleaseValidationTests.test_cli_doctor_subprocess",

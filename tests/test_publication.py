@@ -2,8 +2,11 @@
 
 import importlib.util
 import json
+import tempfile
 import unittest
 from pathlib import Path
+
+from tools.docs_check import check_document
 
 ROOT = Path(__file__).resolve().parents[1]
 spec = importlib.util.spec_from_file_location(
@@ -37,3 +40,27 @@ class PublicationTests(unittest.TestCase):
         source = (ROOT / "packaging/build_windows.py").read_text(encoding="utf-8")
         self.assertNotIn('shutil.copytree(ROOT / "docs"', source)
         self.assertIn("public_files", source)
+
+    def test_documentation_checks_picture_sources_and_anchors(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            page = root / "README.md"
+            for name in ["dark.svg", "light.svg"]:
+                (root / name).write_text('<svg xmlns="http://www.w3.org/2000/svg"/>')
+            valid = (
+                "# Demo\n[Workflow](#demo)\n<picture>"
+                '<source srcset="dark.svg 1x, light.svg 2x">'
+                '<img src="light.svg" alt="Demo"></picture>\n'
+            )
+            page.write_text(valid, encoding="utf-8")
+            check_document(page, root)
+            for broken in [
+                valid.replace("dark.svg", "missing.svg"),
+                valid.replace('src="light.svg"', 'src="missing.svg"'),
+                valid.replace("#demo)", "#missing)"),
+                valid.replace("dark.svg", "../outside.svg"),
+            ]:
+                with self.subTest(markup=broken):
+                    page.write_text(broken, encoding="utf-8")
+                    with self.assertRaises(ValueError):
+                        check_document(page, root)
