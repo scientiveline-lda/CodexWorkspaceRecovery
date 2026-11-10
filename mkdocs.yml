@@ -14,6 +14,7 @@ nav:
   - Format: CWMF.md
   - Security: security.md
   - Testing: testing.md
+  - Validation summary: validation-summary.md
   - Validation: validation.md
   - Engineering: engineering.md
   - Release procedure: release-engineering.md

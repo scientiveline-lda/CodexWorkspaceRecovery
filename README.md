@@ -1,50 +1,111 @@
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/readme/hero-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="docs/assets/readme/hero-light.svg">
+  <img src="docs/assets/readme/hero-light.svg" alt="Scientive Line — preserve the work behind the code. Encrypted workspace exports and independently verified filesystem recovery." width="1200">
+</picture>
+
 # Codex Workspace Recovery
 
-Windows portable export/import for local Codex history and selected projects, by scientiveline-lda.
+A **Scientive Line engineering showcase** for preserving the knowledge held in local Codex conversations, attachments and selected project state.
 
-Preserve engineering conversations, attachment bytes and project working state in an encrypted package. Verify its signed inventory, reconstruct it into a separate directory, then verify the recovered content. **Import creates a portable filesystem representation; it does not restore the Codex sidebar or transfer accounts/cloud history.**
+[![Windows validation](https://github.com/scientiveline-lda/CodexWorkspaceRecovery/actions/workflows/windows.yml/badge.svg?branch=main)](https://github.com/scientiveline-lda/CodexWorkspaceRecovery/actions/workflows/windows.yml)
+[![CodeQL](https://github.com/scientiveline-lda/CodexWorkspaceRecovery/actions/workflows/codeql.yml/badge.svg?branch=main)](https://github.com/scientiveline-lda/CodexWorkspaceRecovery/actions/workflows/codeql.yml)
+[![Platform: Windows 11 x64](https://img.shields.io/badge/platform-Windows%2011%20x64-327d16)](docs/compatibility.md)
+[![License: All rights reserved](https://img.shields.io/badge/license-All%20rights%20reserved-404040)](LICENSE)
 
-## Use the Windows distribution
+**[See the workflow](#see-the-recovery-workflow)** · **[Engineering decisions](#what-the-engineering-demonstrates)** · **[Validation](#evidence-over-assurances)** · **[Operator guide](docs/operator-runbook.md)**
 
-Extract the complete distribution into a short versioned directory. Its embedded Python, age, Minisign and MinGit are included; normal operations require no downloads, installed Python or developer Git. The distribution is unsigned; compare its SHA-256 through your trusted delivery channel. Checksums alone do not authenticate a publisher.
+Import reconstructs a **separate filesystem workspace**. Native Codex sidebar restoration, account transfer and cloud-history migration are outside this project's scope.
 
-```powershell
-$cwm = 'C:\Tools\Cwm\bin\cwm.cmd'
-& $cwm doctor
-& $cwm keys init --output C:\Recovery\keys
-& $cwm keys export-recovery --keys C:\Recovery\keys --output C:\Recovery\recovery-keys
-# Close all source desktop/CLI/IDE writers first. All output directories below must be new.
-& $cwm export --home C:\Data\CodexSource --project C:\Data\Project --source-closed --keys C:\Recovery\keys --workspace C:\Recovery\export-work --output C:\Recovery\workspace.age
-& $cwm verify C:\Recovery\workspace.age --keys C:\Recovery\recovery-keys --workspace C:\Recovery\verify-work
-& $cwm import plan C:\Recovery\workspace.age --keys C:\Recovery\recovery-keys --target C:\Recovery\recovered --workspace C:\Recovery\plan-work
-& $cwm import apply C:\Recovery\plan-work\restore-plan.json
-& $cwm import verify C:\Recovery\plan-work\restore-plan.json
+## The work is more than the repository
+
+A repository records the code. The surrounding conversations often explain the architecture, rejected alternatives, investigations and decisions that made it possible. Attachments and unfinished working changes supply another part of the picture. Losing those connections makes an engineering project harder to understand and continue.
+
+Codex Workspace Recovery addresses that continuity problem with a practical sequence: capture supported local evidence, protect it in a portable package, reconstruct it elsewhere, and compare the result against authenticated expectations. Missing information remains visible in the report instead of disappearing behind a successful file copy.
+
+For Scientive Line, this project demonstrates how we approach consequential software: explicit boundaries, inspectable evidence and recovery paths designed alongside the successful path.
+
+## See the recovery workflow
+
+The demonstration below comes from an **executed Windows distribution**, outside the developer checkout, using disposable synthetic conversations, an attachment and a dirty Git project. It includes encryption, independent package verification, import and an independently calculated source-to-destination comparison.
+
+<picture>
+  <source media="(max-width: 600px)" srcset="docs/assets/readme/terminal-mobile.svg">
+  <img src="docs/assets/readme/terminal.svg" alt="Selected actual CLI results: export verification is verified; import verification is verified; deployed bytes match; selected project state is equivalent. The synthetic source remained unchanged." width="1200" loading="lazy">
+</picture>
+
+*Commands and JSON are abbreviated. These are selected results from a synthetic run, not a native Codex interface or a production-account migration.*
+
+<details>
+<summary>Read the selected results as text</summary>
+
+```text
+cwm export ...
+  verification.status: "verified"
+
+cwm import verify ...
+  status: "verified"
+  deployed_bytes_match: true
+  projects[0].status: "equivalent_selected_state"
 ```
 
-Existing parents must exist. Keep recovery keys separate from the archive; losing them makes decryption impossible. The signing private key is excluded from recovery-key copies. Key files are ACL-protected, not passphrase-encrypted.
+A separate fixture oracle also passed its content comparison, and the source byte inventory remained unchanged. The [operator guide](docs/operator-runbook.md) contains complete command syntax and prerequisites.
 
-## Supported content
+</details>
 
-- Active/archived plain and Zstandard conversation rollouts, exact raw bytes, ordered events and supported inherited history.
-- Available local/embedded attachments and explicit missing/external dispositions.
-- Selected database records and project associations; unknown schemas are reported, not copied indiscriminately.
-- Ordinary project files, empty directories, and tested Git working state: staged/unstaged edits, conflicts, flags, detached HEAD, refs and selected linked worktrees.
-- New-directory import plans, verification, idempotent reapplication and interruption recovery that preserves later work.
+```mermaid
+flowchart LR
+    A[Capture] --> B[Encrypt and sign]
+    B --> C[Verify]
+    C --> D[Import]
+    D --> E[Compare]
+```
 
-Supported runtime: Windows 11 x64, local NTFS, portable Windows names and checked paths shorter than 248 characters. Source writers must be closed. Read guards and comparisons establish observed content integrity, **not an atomic application-wide snapshot**.
+Source writers are closed before capture. The archive is authenticated before extraction and semantically checked before deployment. Import publishes into a new destination only after verification; the final comparison checks the recovered evidence and selected project state.
 
-No native application activation, account/cloud migration, active-home merge, remote/WSL recovery, automatic network retrieval or imported setup execution. Sparse/split indexes, shallow/partial repositories and alternates are refused. Submodule/LFS and filesystem metadata limitations are explicit. See [compatibility](docs/compatibility.md).
+## What the engineering demonstrates
 
-## Data protection and verification
+| Engineering choice | Practical consequence |
+| --- | --- |
+| **Preserve evidence before deriving views** | Original transcript bytes and unknown events remain available alongside readable history, so interpretation does not replace the original record. |
+| **Check recovery independently** | A separate cryptographic verifier checks package membership, signatures and hashes; semantic checks reconcile histories and references, while acceptance tests use an independent fixture oracle. |
+| **Make deployment non-destructive** | Plans expose mappings and expected writes. Existing targets are refused; reapplication, resume and rollback protect unrelated content and subsequent work. |
+| **Package the recovery environment** | The Windows build includes Python, age, Minisign and MinGit. Normal export/import needs no developer checkout, installed Git or recovery-time downloads. |
 
-Every package is age-encrypted. A canonical manifest signed with the locally provisioned Minisign key covers payload membership, byte sizes and SHA-256 hashes. The independent verifier does not import acquisition/deployment adapters. Semantic admission checks histories, attachment relationships and project references before import. A trusted signature does not establish that imported content is safe to execute.
+These decisions are explained in the [architecture](docs/architecture.md), [format specification](docs/CWMF.md) and [security model](docs/security.md).
 
-Plaintext staging and destinations have restricted ACLs. Volume encryption is recommended, not automatically configured or required. Authentication stores are excluded; secret findings never silently redact conversations. Pattern scans cannot prove absence of secrets. See [security](docs/security.md).
+## Evidence over assurances
 
-## Documentation and development
+The **v0.3.0 reference validation** recorded the following results. These are scoped engineering measurements, not a certification or a guarantee for every installation.
 
-[Operator guide](docs/operator-runbook.md) | [CLI reference](docs/cli-reference.md) | [Architecture](docs/architecture.md) | [Format](docs/CWMF.md) | [Testing](docs/testing.md) | [Release validation](docs/validation.md)
+| Reference check | Recorded outcome |
+| --- | --- |
+| Required automated tests | **110 passed**, zero skips or failures |
+| Real process-termination boundaries | **9 passed** |
+| Deliberate safety mutations | **4 detected** |
+| Packaged reference recovery | **685 sessions**, independently compared |
+| Unsigned distribution builds | **2 byte-identical builds** |
 
-Developer setup uses Python 3.14 and the hash-locked runtime/quality requirements. Provisioning scripts download pinned build inputs only when explicitly requested; recovery never invokes them. See [installation](docs/installation.md).
+See the [public validation summary](docs/validation-summary.md) for provenance, workloads, refusal cases and limitations. Live badges above report GitHub's current workflow status separately from these historical results.
 
-This repository is a scientiveline-lda engineering showcase, provided without warranty or support commitment. Users are responsible for their use and backups; liability is excluded to the extent permitted by applicable law. All rights reserved; see [LICENSE](LICENSE). This independent project is not affiliated with or endorsed by OpenAI. Public visibility does not grant a reuse license. No archives, private keys, real conversations or workstation diagnostics belong in this repository.
+## Evaluate the project
+
+Start with the [installation and developer setup](docs/installation.md), then use the [CLI reference](docs/cli-reference.md) and [operator guide](docs/operator-runbook.md). **No public binary release is currently offered.** The self-contained Windows distribution has been built and tested; source evaluation and building require the documented development environment and separately authorized use under [LICENSE](LICENSE).
+
+| Boundary | Current scope |
+| --- | --- |
+| **Supported** | Windows 11 x64, local NTFS; supported active/archived history, available attachments, selected records, project bytes, empty directories and tested Git state. |
+| **Limited** | Closed-writer capture verifies observed bytes and membership, not an atomic application-wide snapshot. Missing content and excluded metadata are reported. |
+| **Refused or unsupported** | Existing-target merging, native/account/cloud restoration, WSL/remote capture, unsafe paths and uncertified Git states. See the [compatibility matrix](docs/compatibility.md). |
+
+Export archives are encrypted and locally signed. Distribution ZIPs remain **unsigned**; a checksum alone does not authenticate their publisher. Keep recovery keys separately, protect plaintext staging and retain independent backups. Further operational guidance is in [troubleshooting](docs/troubleshooting.md) and [security](docs/security.md).
+
+## Built by Scientive Line
+
+We combine engineering experience with software development to turn complex operational problems into dependable digital tools. This showcase makes that approach inspectable: the implementation, trade-offs, tests and limits are all part of the work.
+
+**[Explore our portfolio](https://scientiveline.com/portfolio)** · **[Discuss a software engineering challenge](https://scientiveline.com/contact)** · **[Scientive Line](https://scientiveline.com/)**
+
+---
+
+This is a showcase, provided without warranty or support commitment. Users remain responsible for their use and backups; liability is excluded to the extent permitted by law. **All rights reserved.** See [LICENSE](LICENSE). This independent project is not affiliated with or endorsed by OpenAI.

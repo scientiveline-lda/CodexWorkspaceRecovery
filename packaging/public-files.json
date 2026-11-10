@@ -36,6 +36,7 @@
     "docs/security.md",
     "docs/testing.md",
     "docs/troubleshooting.md",
+    "docs/validation-summary.md",
     "docs/validation.md",
     "mkdocs.yml",
     "packaging/build_windows.py",
