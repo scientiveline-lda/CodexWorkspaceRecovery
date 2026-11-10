@@ -1,0 +1,17 @@
+[
+  {
+    "repository": "actions/checkout",
+    "observed_tag": "v4",
+    "commit": "11d5960a326750d5838078e36cf38b85af677262"
+  },
+  {
+    "repository": "actions/setup-python",
+    "observed_tag": "v5",
+    "commit": "a26af69be951a213d495a4c3e4e4022e16d87065"
+  },
+  {
+    "repository": "github/codeql-action",
+    "observed_tag": "v4",
+    "commit": "33d7b85da1a04171e211befe2c739303b9a4c066"
+  }
+]

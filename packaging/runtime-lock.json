@@ -1,0 +1,7 @@
+{
+  "version": "3.14.5",
+  "url": "https://www.python.org/ftp/python/3.14.5/python-3.14.5-embed-amd64.zip",
+  "file": "python-3.14.5-embed-amd64.zip",
+  "sha256": "ba6bd811c4eedb19195cf275770ef127e893d63701e24152606e2cb76f6d876a",
+  "bootstrap_authentication": "Official python.org HTTPS; organization release signing still required"
+}

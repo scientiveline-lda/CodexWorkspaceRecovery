@@ -1,0 +1,43 @@
+[build-system]
+requires = ["setuptools==84.2.1"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "codex-workspace-recovery"
+dynamic = ["version"]
+description = "Encrypted portable Codex workspace export and filesystem recovery"
+license = "LicenseRef-Proprietary"
+license-files = ["LICENSE"]
+requires-python = ">=3.14,<3.15"
+dependencies = ["rfc8785==0.1.4", "jsonschema==4.26.0"]
+
+[project.scripts]
+cwm = "cwm.cli:main"
+cwm-verify = "cwm_verify:main"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+py-modules = ["cwm_verify"]
+
+[tool.setuptools.dynamic]
+version = {attr = "cwm.__version__"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+cwm = ["schemas/*.json"]
+
+[tool.ruff]
+target-version = "py314"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F", "I", "UP"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/test_core.py" = ["F403", "F405"]
+"tools/end_to_end_drill.py" = ["E402"]
+
+"tools/fault_campaign.py" = ["E402"]
+"tools/validate_release.py" = ["E402"]

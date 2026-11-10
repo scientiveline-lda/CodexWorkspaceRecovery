@@ -1,0 +1,9 @@
+include LICENSE README.md
+recursive-include src *.py *.json
+prune docs/plans
+prune docs/evidence
+prune laboratory
+prune artifacts
+prune vendor
+prune private
+global-exclude *.pyc *.key *.agekey *.sqlite* *.jsonl *.age

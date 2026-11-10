@@ -1,0 +1,16 @@
+[
+  {
+    "name": "age",
+    "url": "https://raw.githubusercontent.com/FiloSottile/age/v1.3.2/LICENSE",
+    "sha256": "c5d65279d02955c0fc2294ae417c3add650d228f4f5c82bd6d531fc26c89cd96",
+    "license": "BSD-3-Clause",
+    "file": "age.txt"
+  },
+  {
+    "name": "minisign",
+    "url": "https://raw.githubusercontent.com/jedisct1/minisign/0.12/LICENSE",
+    "sha256": "01aa50818d6609e85a9610b7d04da037e8b28bcf3bb5b5b4963c0c3f7abdabbd",
+    "license": "ISC",
+    "file": "minisign.txt"
+  }
+]

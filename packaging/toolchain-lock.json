@@ -1,0 +1,14 @@
+[
+  {
+    "name": "age",
+    "url": "https://github.com/FiloSottile/age/releases/download/v1.3.2/age-v1.3.2-windows-amd64.zip",
+    "archive_sha256": "f48d8f8f9ebe903ab5027ed067652f2cc1db94bc206976430133b905dcd8e8c7",
+    "bootstrap_authentication": "GitHub HTTPS release; age digest matched GitHub asset metadata; maintainer signatures not independently verified"
+  },
+  {
+    "name": "minisign",
+    "url": "https://github.com/jedisct1/minisign/releases/download/0.12/minisign-0.12-win64.zip",
+    "archive_sha256": "37b600344e20c19314b2e82813db2bfdcc408b77b876f7727889dbd46d539479",
+    "bootstrap_authentication": "GitHub HTTPS release; age digest matched GitHub asset metadata; maintainer signatures not independently verified"
+  }
+]

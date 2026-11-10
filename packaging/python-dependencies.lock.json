@@ -1,0 +1,44 @@
+[
+  {
+    "name": "attrs",
+    "version": "26.1.0",
+    "file": "attrs-26.1.0-py3-none-any.whl",
+    "sha256": "c647aa4a12dfbad9333ca4e71fe62ddc36f4e63b2d260a37a8b83d2f043ac309"
+  },
+  {
+    "name": "jsonschema",
+    "version": "4.26.0",
+    "file": "jsonschema-4.26.0-py3-none-any.whl",
+    "sha256": "d489f15263b8d200f8387e64b4c3a75f06629559fb73deb8fdfb525f2dab50ce"
+  },
+  {
+    "name": "jsonschema_specifications",
+    "version": "2025.9.1",
+    "file": "jsonschema_specifications-2025.9.1-py3-none-any.whl",
+    "sha256": "98802fee3a11ee76ecaca44429fda8a41bff98b00a0f2838151b113f210cc6fe"
+  },
+  {
+    "name": "referencing",
+    "version": "0.37.0",
+    "file": "referencing-0.37.0-py3-none-any.whl",
+    "sha256": "381329a9f99628c9069361716891d34ad94af76e461dcb0335825aecc7692231"
+  },
+  {
+    "name": "rfc8785",
+    "version": "0.1.4",
+    "file": "rfc8785-0.1.4-py3-none-any.whl",
+    "sha256": "520d690b448ecf0703691c76e1a34a24ddcd4fc5bc41d589cb7c58ec651bcd48"
+  },
+  {
+    "name": "rpds_py",
+    "version": "2026.9.1",
+    "file": "rpds_py-2026.9.1-cp314-cp314-win_amd64.whl",
+    "sha256": "837c6b305e26fe0f75b15c92cf3b2ba29e0ae19dc40b1c557b026cb426347d0c"
+  },
+  {
+    "name": "setuptools",
+    "version": "84.2.1",
+    "file": "setuptools-84.2.1-py3-none-any.whl",
+    "sha256": "ca140b45d5325a9478f880e351484f62fef15f336462e449ca0c03c873d589c2"
+  }
+]
