@@ -1,0 +1,96 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "format",
+    "version",
+    "draft",
+    "archive_id",
+    "created_at",
+    "producer",
+    "scope",
+    "signing_key_id",
+    "capture",
+    "payload",
+    "features",
+    "provenance"
+  ],
+  "properties": {
+    "format": {
+      "const": "CWMF"
+    },
+    "version": {
+      "const": "1.0"
+    },
+    "draft": {
+      "const": 3
+    },
+    "archive_id": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{32}$"
+    },
+    "created_at": {
+      "type": "string"
+    },
+    "producer": {
+      "type": "string",
+      "minLength": 1
+    },
+    "scope": {
+      "type": "string",
+      "minLength": 1
+    },
+    "signing_key_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "capture": {
+      "type": "string",
+      "enum": [
+        "guarded_validated",
+        "best_effort_incomplete"
+      ]
+    },
+    "features": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "sha256",
+          "jcs-rfc8785",
+          "minisign",
+          "zip64",
+          "portable-v1",
+          "raw-rollouts-v1"
+        ]
+      },
+      "uniqueItems": true
+    },
+    "provenance": {
+      "type": "object"
+    },
+    "payload": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "sha256",
+          "size"
+        ],
+        "properties": {
+          "sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "size": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 17179869184
+          }
+        }
+      }
+    }
+  }
+}
