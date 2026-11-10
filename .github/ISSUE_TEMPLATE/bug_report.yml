@@ -1,0 +1,19 @@
+name: Synthetic bug report
+description: Report a reproducible product issue without private data
+body:
+  - type: checkboxes
+    attributes:
+      label: Public data boundary
+      options:
+        - label: This report contains no real transcripts, credentials, archives, private paths or diagnostic bundles.
+          required: true
+  - type: textarea
+    attributes:
+      label: Version, supported scenario and synthetic reproduction
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Expected and actual result with safe error codes
+    validations:
+      required: true
