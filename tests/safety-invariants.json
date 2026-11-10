@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "invariants": {
+    "trust": [
+      "tests.test_adversarial.AdversarialTests.test_expired_trust",
+      "tests.test_closure.PolicyTests.test_offset_expiry_is_compared_as_instant"
+    ],
+    "source_safety": [
+      "tests.test_core.CoreTests.test_capture_no_source_mutation_or_auth_copy",
+      "tests.test_core.CoreTests.test_live_database_writer_blocks_windows_capture"
+    ],
+    "semantic_admission": [
+      "tests.test_integration.IntegrationTests.test_encrypted_signed_project_roundtrip_idempotence_and_rollback",
+      "tests.test_closure.ClosureTests.test_signed_logical_substitution_rejected_before_deployment"
+    ],
+    "containment": [
+      "tests.test_closure.ClosureTests.test_signed_bundle_escape_rejected",
+      "tests.test_closure.ClosureTests.test_signed_git_administration_file_rejected"
+    ],
+    "encryption": [
+      "tests.test_integration.IntegrationTests.test_ciphertext_tampering_rejected",
+      "tests.test_integration.IntegrationTests.test_each_recipient_independently_decrypts"
+    ],
+    "later_work": [
+      "tests.test_integration.IntegrationTests.test_changed_destination_is_preserved",
+      "tests.test_closure.ClosureTests.test_changed_metadata_and_forged_marker_do_not_redefine_baseline"
+    ],
+    "outcomes": [
+      "tests.test_closure.PolicyTests.test_result_exit_contract",
+      "tests.test_closure.ClosureTests.test_actual_cli_mismatch_returns_five"
+    ],
+    "coordination": [
+      "tests.test_closure.PolicyTests.test_kernel_lock_refuses_concurrent_owner",
+      "tests.test_core.CoreTests.test_output_lock_refuses_concurrent_writer"
+    ],
+    "recovery": [
+      "tests.test_adversarial.AdversarialTests.test_crash_after_publish_reconciles",
+      "tests.test_adversarial.AdversarialTests.test_interrupted_apply_resumes_without_discarding_staging"
+    ],
+    "attachment_relationships": [
+      "tests.test_closure.ClosureTests.test_actual_cli_complete_alias_recovery_returns_zero",
+      "tests.test_closure.ClosureTests.test_signed_missing_attachment_relationship_rejected",
+      "tests.test_portable.PortableTests.test_actual_missing_attachment_remains_a_gap"
+    ],
+    "directories": [
+      "tests.test_portable.PortableTests.test_empty_directory_and_file_recovery"
+    ],
+    "history_boundaries": [
+      "tests.test_portable.PortableTests.test_history_ordinal_disagreement_refused"
+    ],
+    "imported_code_inert": [
+      "tests.test_portable.PortableTests.test_archive_controlled_hook_directory_never_executes"
+    ],
+    "key_source_separation": [
+      "tests.test_portable.PortableTests.test_key_profile_inside_source_is_refused_before_writes",
+      "tests.test_portable.PortableTests.test_other_age_identity_excluded_with_explicit_gap"
+    ],
+    "opaque_data": [
+      "tests.test_portable.PortableTests.test_project_db_extension_is_opaque_file_data",
+      "tests.test_portable.PortableTests.test_attachment_db_extension_not_opened_as_state"
+    ]
+  },
+  "review": "Test mapping is not an arbitrary coverage-percentage claim; review branch evidence before release."
+}
