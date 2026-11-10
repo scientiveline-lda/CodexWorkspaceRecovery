@@ -1,0 +1,26 @@
+site_name: Codex Workspace Recovery
+site_description: Evidence-preserving Windows workspace recovery by scientiveline-lda
+strict: true
+use_directory_urls: false
+nav:
+  - Overview: index.md
+  - Installation: installation.md
+  - Commands: cli-reference.md
+  - Operator guide: operator-runbook.md
+  - Troubleshooting: troubleshooting.md
+  - Compatibility: compatibility.md
+  - Architecture: architecture.md
+  - Decisions: decisions.md
+  - Format: CWMF.md
+  - Security: security.md
+  - Testing: testing.md
+  - Validation: validation.md
+  - Engineering: engineering.md
+  - Release procedure: release-engineering.md
+  - Repository governance: repository-governance.md
+  - Publication: publication.md
+  - Implementation status: implementation-status.md
+  - Risks: risk-register.md
+markdown_extensions:
+  - fenced_code
+  - tables
