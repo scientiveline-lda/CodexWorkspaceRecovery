@@ -1,0 +1,100 @@
+{
+  "adapter": "selected-records-v1",
+  "columns": {
+    "projects": [
+      "id",
+      "name",
+      "created_at_ms",
+      "updated_at_ms",
+      "metadata",
+      "position"
+    ],
+    "project_roots": [
+      "project_id",
+      "path",
+      "position"
+    ],
+    "threads": [
+      "id",
+      "project_id",
+      "title",
+      "name",
+      "cwd",
+      "model",
+      "model_provider",
+      "history_mode",
+      "creator_user_id",
+      "creator_account_id",
+      "agent_nickname",
+      "agent_path",
+      "agent_role",
+      "approval_mode",
+      "archived",
+      "archived_at",
+      "attached_thread_parent_id",
+      "cli_version",
+      "created_at",
+      "created_at_ms",
+      "daybreak_enabled",
+      "first_user_message",
+      "git_branch",
+      "git_origin_url",
+      "git_sha",
+      "has_user_event",
+      "is_pinned",
+      "memory_mode",
+      "originator",
+      "preview",
+      "reasoning_effort",
+      "recency_at",
+      "recency_at_ms",
+      "rollout_path",
+      "sandbox_policy",
+      "section_entered_at_ms",
+      "section_position",
+      "source",
+      "thread_section_id",
+      "thread_source",
+      "tokens_used",
+      "updated_at",
+      "updated_at_ms"
+    ],
+    "thread_turns": [
+      "thread_id",
+      "turn_id",
+      "completed_at",
+      "duration_ms",
+      "error_json",
+      "final_agent_item_id",
+      "first_user_item_id",
+      "rollout_byte_offset",
+      "rollout_end_byte_offset",
+      "rollout_end_ordinal",
+      "rollout_ordinal",
+      "root_turn_id",
+      "started_at",
+      "status"
+    ],
+    "thread_items": [
+      "thread_id",
+      "turn_id",
+      "item_id",
+      "item_json",
+      "item_type",
+      "rollout_ordinal",
+      "started_at_ms",
+      "completed_at_ms",
+      "created_at_ms",
+      "updated_at_ordinal"
+    ],
+    "thread_history_projection_state": [
+      "thread_id",
+      "next_rollout_byte_offset",
+      "next_rollout_ordinal"
+    ],
+    "thread_spawn_edges": [
+      "parent_thread_id",
+      "child_thread_id"
+    ]
+  }
+}
